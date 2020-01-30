@@ -14,16 +14,19 @@ const forecast = (longitude, latitude, fn) => {
       );
     }
     if (res.body) {
-      fn(null, {
-        temperature: res.body.currently.temperature,
-        tempHigh: res.body.daily.data[0].temperatureHigh,
-        tempLow: res.body.daily.data[0].temperatureLow,
-        precipitation: res.body.currently.precipProbability,
-        humidity: res.body.currently.humidity,
-        wind: res.body.currently.windSpeed,
-        icon: res.body.currently.icon,
-        summary: res.body.daily.summary
-      });
+      fn(
+        null,
+        (data = {
+          temperature: res.body.currently.temperature,
+          tempHigh: res.body.daily.data[0].temperatureHigh,
+          tempLow: res.body.daily.data[0].temperatureLow,
+          precipitation: res.body.currently.precipProbability,
+          humidity: res.body.currently.humidity,
+          wind: res.body.currently.windSpeed,
+          icon: res.body.currently.icon,
+          summary: res.body.daily.summary
+        })
+      );
     } else {
       fn({ error: 'Could not find location.' }, {});
     }

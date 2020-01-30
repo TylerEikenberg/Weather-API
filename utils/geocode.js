@@ -32,10 +32,12 @@ const geocode = (location, fn) => {
   });
 };
 
-const getgeo = () => {
-  geocode(';', (error, { longitude, latitude, location }) => {
-    console.log(error, longitude, latitude, location);
-  });
-};
+module.exports = geocode;
 
-getgeo();
+// const getgeo = () => {
+//   geocode(';', (error, { longitude, latitude, location }) => {
+//     console.log(error, longitude, latitude, location);
+//   });
+// };
+
+// getgeo();

@@ -14,11 +14,21 @@ const geocode = (location, fn) => {
       console.log('Unable to connect to location services.');
     }
     if (res.body.features) {
-      console.log(res.body.features);
+      fn(undefined, {
+        longitude: res.body.features[0].center[0],
+        latitude: res.body.features[0].center[1],
+        location: res.body.features[0].place_name
+      });
     } else {
       console.log('Error: Could not find location.');
     }
   });
 };
 
-geocode('baltimore');
+const getgeo = () => {
+  geocode('baltimore', (error, { longitude, latitude, location }) => {
+    console.log(error, longitude, latitude, location);
+  });
+};
+
+getgeo();

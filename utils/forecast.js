@@ -13,7 +13,10 @@ const forecast = (longitude, latitude, fn) => {
         {}
       );
     }
-    if (res.body) {
+
+    if (!res.body.currently) {
+      fn((error = { message: 'Could not find location' }), {});
+    } else {
       fn(
         null,
         (data = {
@@ -27,8 +30,6 @@ const forecast = (longitude, latitude, fn) => {
           summary: res.body.daily.summary
         })
       );
-    } else {
-      fn((error = { message: 'Could not find location.' }), {});
     }
   });
 };

@@ -17,8 +17,4 @@ const getWeather = (userLocation, dataHandler) => {
   });
 };
 
-// getWeather('baltimore', (data, location) => {
-//   console.log(data, location);
-// });
-
 module.exports = getWeather;

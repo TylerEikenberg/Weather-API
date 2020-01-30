@@ -15,19 +15,19 @@ const geocode = (location, fn) => {
         {}
       );
     }
-    if (res.body.features.length > 0) {
-      fn(undefined, {
-        longitude: res.body.features[0].center[0],
-        latitude: res.body.features[0].center[1],
-        location: res.body.features[0].place_name
-      });
-    } else {
+    if (!res.body.features) {
       fn(
         (error = {
           message: 'Could not find location'
         }),
         {}
       );
+    } else {
+      fn(undefined, {
+        longitude: res.body.features[0].center[0],
+        latitude: res.body.features[0].center[1],
+        location: res.body.features[0].place_name
+      });
     }
   });
 };

@@ -4,7 +4,7 @@ const getWeather = require('../utils/getWeather');
 const app = express();
 
 app.get('/weather', (req, res) => {
-  getWeather(req.query.address, (data, location) => {
+  getWeather(req.query.address, (data, location, error) => {
     const {
       temperature,
       tempHigh,
@@ -25,7 +25,8 @@ app.get('/weather', (req, res) => {
         wind,
         icon,
         summary,
-        location
+        location,
+        error
       });
     } catch (error) {
       console.log('error: ', error);

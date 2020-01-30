@@ -33,34 +33,6 @@ const forecast = (longitude, latitude, fn) => {
   });
 };
 
-// forecast(
-//   39,
-//   -76,
-//   ({
-//     temperature,
-//     precipitation,
-//     wind,
-//     icon,
-//     summary,
-
-//     tempLow,
-//     tempHigh,
-//     humidity
-//   }) => {
-//     console.log(
-//       temperature,
-//       precipitation,
-//       wind,
-//       icon,
-//       summary,
-
-//       tempHigh,
-//       tempLow,
-//       humidity
-//     );
-//   }
-// );
-
 module.exports = forecast;
 
 // icons to make

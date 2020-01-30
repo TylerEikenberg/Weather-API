@@ -1,10 +1,36 @@
 const express = require('express');
+const getWeather = require('../utils/getWeather');
 
 const app = express();
 
 app.get('/weather', (req, res) => {
-  // pass req.query.location to getForecast
-  // res.send info
+  getWeather(req.query.address, (data, location) => {
+    const {
+      temperature,
+      tempHigh,
+      tempLow,
+      precipitation,
+      humidity,
+      wind,
+      icon,
+      summary
+    } = data;
+    try {
+      res.send({
+        temperature,
+        tempHigh,
+        tempLow,
+        precipitation,
+        humidity,
+        wind,
+        icon,
+        summary,
+        location
+      });
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  });
 });
 
 app.listen(3000, () => {

@@ -4,13 +4,13 @@ const forecast = require('./forecast');
 const getWeather = (userLocation, dataHandler) => {
   geocode(userLocation, (geoError, { longitude, latitude, location }) => {
     if (geoError) {
-      dataHandler({ error: 'Could not connect to location services' });
+      dataHandler(geoError.message);
     } else {
       forecast(latitude, longitude, (forecastError, data) => {
         if (forecastError) {
-          dataHandler({ error: 'Could not connect to location services' });
+          dataHandler(forecastError.message);
         } else {
-          dataHandler(data, location);
+          dataHandler(data, location, geoError);
         }
       });
     }

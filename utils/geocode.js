@@ -9,13 +9,13 @@ const geocode = (location, fn) => {
   request({ url, json: true }, (error, res) => {
     if (error) {
       fn(
-        {
-          error: 'Could not connect to location services'
-        },
+        (error = {
+          message: 'Could not connect to location services'
+        }),
         {}
       );
     }
-    if (res.body.features) {
+    if (res.body.features.length > 0) {
       fn(undefined, {
         longitude: res.body.features[0].center[0],
         latitude: res.body.features[0].center[1],
@@ -23,9 +23,9 @@ const geocode = (location, fn) => {
       });
     } else {
       fn(
-        {
-          error: 'Could not find location'
-        },
+        (error = {
+          message: 'Could not find location'
+        }),
         {}
       );
     }

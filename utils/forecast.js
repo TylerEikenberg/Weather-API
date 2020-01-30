@@ -7,9 +7,9 @@ const forecast = (longitude, latitude, fn) => {
   request({ url, json: true }, (err, res) => {
     if (err) {
       fn(
-        {
-          error: 'Could not connect to forecast service.'
-        },
+        (error = {
+          message: 'Could not connect to forecast service.'
+        }),
         {}
       );
     }
@@ -28,7 +28,7 @@ const forecast = (longitude, latitude, fn) => {
         })
       );
     } else {
-      fn({ error: 'Could not find location.' }, {});
+      fn((error = { message: 'Could not find location.' }), {});
     }
   });
 };

@@ -7,52 +7,53 @@ const forecast = (longitude, latitude, fn) => {
   request({ url, json: true }, (err, res) => {
     if (err) {
       fn({
-        error: 'Could not retrieve forecast.'
+        error: 'Could not connect to forecast service.'
       });
     }
-
-    console.log(res.body);
-    fn({
-      temperature: res.body.currently.temperature,
-      tempHigh: res.body.daily.data[0].temperatureHigh,
-      tempLow: res.body.daily.data[0].temperatureLow,
-      precipitation: res.body.currently.precipProbability,
-      humidity: res.body.currently.humidity,
-      wind: res.body.currently.windSpeed,
-      icon: res.body.currently.icon,
-      time: res.body.currently.time,
-      summary: res.body.daily.summary
-    });
+    if (res.body) {
+      fn({
+        temperature: res.body.currently.temperature,
+        tempHigh: res.body.daily.data[0].temperatureHigh,
+        tempLow: res.body.daily.data[0].temperatureLow,
+        precipitation: res.body.currently.precipProbability,
+        humidity: res.body.currently.humidity,
+        wind: res.body.currently.windSpeed,
+        icon: res.body.currently.icon,
+        summary: res.body.daily.summary
+      });
+    } else {
+      fn({ error: 'Could not find location.' });
+    }
   });
 };
 
-forecast(
-  39,
-  -76,
-  ({
-    temperature,
-    precipitation,
-    wind,
-    icon,
-    summary,
-    time,
-    tempLow,
-    tempHigh,
-    humidity
-  }) => {
-    console.log(
-      temperature,
-      precipitation,
-      wind,
-      icon,
-      summary,
-      time,
-      tempHigh,
-      tempLow,
-      humidity
-    );
-  }
-);
+// forecast(
+//   39,
+//   -76,
+//   ({
+//     temperature,
+//     precipitation,
+//     wind,
+//     icon,
+//     summary,
+
+//     tempLow,
+//     tempHigh,
+//     humidity
+//   }) => {
+//     console.log(
+//       temperature,
+//       precipitation,
+//       wind,
+//       icon,
+//       summary,
+
+//       tempHigh,
+//       tempLow,
+//       humidity
+//     );
+//   }
+// );
 
 module.exports = forecast;
 

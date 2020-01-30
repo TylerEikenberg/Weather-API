@@ -4,18 +4,23 @@ const getWeather = require('../utils/getWeather');
 const app = express();
 
 app.get('/weather', (req, res) => {
-  getWeather(req.query.address, (data, location, error) => {
-    const {
-      temperature,
-      tempHigh,
-      tempLow,
-      precipitation,
-      humidity,
-      wind,
-      icon,
-      summary
-    } = data;
-    try {
+  getWeather(req.query.address, (error, { data, location }) => {
+    if (error) {
+      res.send({
+        error: error.message
+      });
+    } else {
+      const {
+        temperature,
+        tempHigh,
+        tempLow,
+        precipitation,
+        humidity,
+        wind,
+        icon,
+        summary
+      } = data;
+
       res.send({
         temperature,
         tempHigh,
@@ -25,11 +30,8 @@ app.get('/weather', (req, res) => {
         wind,
         icon,
         summary,
-        location,
-        error
+        location
       });
-    } catch (error) {
-      console.log('error: ', error);
     }
   });
 });

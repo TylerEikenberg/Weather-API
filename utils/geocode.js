@@ -7,6 +7,8 @@ const geocode = (location, fn) => {
   )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
 
   request({ url, json: true }, (error, res) => {
+    console.log('res: ', res.body);
+
     if (error) {
       fn(
         (error = {
@@ -15,7 +17,7 @@ const geocode = (location, fn) => {
         {}
       );
     }
-    if (!res.body.features) {
+    if (res.body.message || res.body.features.length === 0) {
       fn(
         (error = {
           message: 'Could not find location'

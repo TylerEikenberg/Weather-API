@@ -35,14 +35,3 @@ const forecast = (longitude, latitude, fn) => {
 };
 
 module.exports = forecast;
-
-// icons to make
-// icons.set("Clear-night", Skycons.CLEAR_NIGHT);
-// icons.set("Partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
-// icons.set("Partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
-// icons.set("Clouds", Skycons.CLOUDY);
-// icons.set("Rain", Skycons.RAIN);
-// icons.set("Sleet", Skycons.SLEET);
-// icons.set("Snow", Skycons.SNOW);
-// icons.set("Wind", Skycons.WIND);
-// icons.set("Fog", Skycons.FOG);

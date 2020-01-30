@@ -1,7 +1,7 @@
 const geocode = require('./geocode');
 const forecast = require('./forecast');
 
-const getWeather = (userLocation, dataHandler) => {
+const getWeather = (userLocation = 'Baltimore', dataHandler) => {
   geocode(userLocation, (geoError, { longitude, latitude, location }) => {
     if (geoError) {
       dataHandler(geoError, {});

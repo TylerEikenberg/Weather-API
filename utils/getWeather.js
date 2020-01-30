@@ -1,4 +1,3 @@
-// combines forecast and geocode
 const geocode = require('./geocode');
 const forecast = require('./forecast');
 
@@ -11,21 +10,15 @@ const getWeather = (userLocation, dataHandler) => {
         if (forecastError) {
           dataHandler({ error: 'Could not connect to location services' });
         } else {
-          dataHandler(data);
+          dataHandler(data, location);
         }
       });
     }
   });
 };
 
-getWeather('baltimore', data => {
-  console.log(data);
-});
-
-// const getgeo = () => {
-//   geocode(';', (error, { longitude, latitude, location }) => {
-//     console.log(error, longitude, latitude, location);
-//   });
-// };
+// getWeather('baltimore', (data, location) => {
+//   console.log(data, location);
+// });
 
 module.exports = getWeather;

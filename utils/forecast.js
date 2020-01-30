@@ -6,12 +6,15 @@ const forecast = (longitude, latitude, fn) => {
 
   request({ url, json: true }, (err, res) => {
     if (err) {
-      fn({
-        error: 'Could not connect to forecast service.'
-      });
+      fn(
+        {
+          error: 'Could not connect to forecast service.'
+        },
+        {}
+      );
     }
     if (res.body) {
-      fn({
+      fn(null, {
         temperature: res.body.currently.temperature,
         tempHigh: res.body.daily.data[0].temperatureHigh,
         tempLow: res.body.daily.data[0].temperatureLow,
@@ -22,7 +25,7 @@ const forecast = (longitude, latitude, fn) => {
         summary: res.body.daily.summary
       });
     } else {
-      fn({ error: 'Could not find location.' });
+      fn({ error: 'Could not find location.' }, {});
     }
   });
 };

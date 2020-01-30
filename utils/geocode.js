@@ -1,6 +1,3 @@
-/**
- * create function that converts location to coordinates
- */
 require('dotenv').config();
 const request = require('request');
 
@@ -11,7 +8,12 @@ const geocode = (location, fn) => {
 
   request({ url, json: true }, (error, res) => {
     if (error) {
-      console.log('Unable to connect to location services.');
+      fn(
+        {
+          error: 'Could not connect to location services'
+        },
+        {}
+      );
     }
     if (res.body.features) {
       fn(undefined, {
@@ -20,13 +22,18 @@ const geocode = (location, fn) => {
         location: res.body.features[0].place_name
       });
     } else {
-      console.log('Error: Could not find location.');
+      fn(
+        {
+          error: 'Could not find location'
+        },
+        {}
+      );
     }
   });
 };
 
 const getgeo = () => {
-  geocode('baltimore', (error, { longitude, latitude, location }) => {
+  geocode(';', (error, { longitude, latitude, location }) => {
     console.log(error, longitude, latitude, location);
   });
 };

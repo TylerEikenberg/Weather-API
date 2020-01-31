@@ -7,8 +7,6 @@ const geocode = (location, fn) => {
   )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
 
   request({ url, json: true }, (error, res) => {
-    console.log('res: ', res.body);
-
     if (error) {
       fn(
         (error = {

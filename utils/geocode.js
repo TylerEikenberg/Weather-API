@@ -6,8 +6,8 @@ const geocode = (location, fn) => {
     location
   )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
 
-  request({ url, json: true }, (error, res) => {
-    if (error) {
+  request({ url, json: true }, (err, res) => {
+    if (err) {
       fn(
         (error = {
           message: 'Could not connect to location services'

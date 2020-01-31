@@ -3,6 +3,10 @@ const getWeather = require('../utils/getWeather');
 
 const app = express();
 
+app.get('', (req, res) => {
+  res.redirect('/weather');
+});
+
 app.get('/weather', (req, res) => {
   getWeather(req.query.address, (error, { data, location }) => {
     if (error) {

@@ -1,20 +1,16 @@
 const geocode = require('./geocode');
 const forecast = require('./forecast');
 
-const getWeather = (userLocation = 'Baltimore', dataHandler) => {
-  geocode(userLocation, (geoError, { longitude, latitude, location }) => {
-    if (geoError) {
-      dataHandler(geoError, {});
-    } else {
-      forecast(latitude, longitude, (forecastError, data) => {
-        if (forecastError) {
-          dataHandler(forecastError, {});
-        } else {
-          dataHandler(undefined, { data, location });
-        }
-      });
-    }
-  });
+const getWeather = async (userLocation = 'Baltimore') => {
+  const geocodeData = await geocode(userLocation);
+  const forecastData = await forecast(
+    geocodeData.features[0].center[1],
+    geocodeData.features[0].center[0]
+  );
+
+  return { forecastData, geocodeData };
 };
 
 module.exports = getWeather;
+
+getWeather();

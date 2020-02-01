@@ -1,31 +1,32 @@
 require('dotenv').config();
 const request = require('request-promise');
 
-// rewrite function to use async await
-// if error return error
-// if success return correct data
-
 const geocode = async location => {
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
     location
   )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
 
   try {
-    return await request({ url, json: true });
+    return (data = await request({ url, json: true }));
   } catch (error) {
-    return error;
+    return (error = error);
   }
 };
 
 module.exports = geocode;
 
-const getGeo = async location => {
-  const { features } = await geocode(location);
-  const { place_name } = features[0];
-  const [longitude, latitude] = features[0].center;
-  console.log(longitude, latitude);
-};
-getGeo(';');
+// figure out how to get error from geocode when error occurs
+// const getGeo = async location => {
+//   const response = await geocode(location);
+//   if (response.error || response.features.length === 0) {
+//     console.log('Error: Invalid location.');
+//   } else {
+//     const { place_name } = response.features[0];
+//     const [longitude, latitude] = response.features[0].center;
+//     console.log(place_name, longitude, latitude);
+//   }
+// };
+// getGeo('lab');
 
 // locationName = result.features[0].place_name;
 // longitude = result.features[0].center[0]

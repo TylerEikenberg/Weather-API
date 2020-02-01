@@ -1,43 +1,32 @@
 require('dotenv').config();
-const request = require('request');
+const request = require('request-promise');
 
-const geocode = (location, fn) => {
+// rewrite function to use async await
+// if error return error
+// if success return correct data
+
+const geocode = async location => {
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
     location
   )}.json?access_token=${process.env.GEOCODE_TOKEN}&limit=1`;
 
-  request({ url, json: true }, (err, res) => {
-    if (err) {
-      fn(
-        (error = {
-          message: 'Could not connect to location services'
-        }),
-        {}
-      );
-    }
-    if (res.body.message || res.body.features.length === 0) {
-      fn(
-        (error = {
-          message: 'Could not find location'
-        }),
-        {}
-      );
-    } else {
-      fn(undefined, {
-        longitude: res.body.features[0].center[0],
-        latitude: res.body.features[0].center[1],
-        location: res.body.features[0].place_name
-      });
-    }
-  });
+  try {
+    return await request({ url, json: true });
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = geocode;
 
-// const getgeo = () => {
-//   geocode(';', (error, { longitude, latitude, location }) => {
-//     console.log(error, longitude, latitude, location);
-//   });
-// };
+const getGeo = async location => {
+  const { features } = await geocode(location);
+  const { place_name } = features[0];
+  const [longitude, latitude] = features[0].center;
+  console.log(longitude, latitude);
+};
+getGeo(';');
 
-// getgeo();
+// locationName = result.features[0].place_name;
+// longitude = result.features[0].center[0]
+// latitude = result.features[0].center[1]

@@ -23,3 +23,11 @@ const geocode = (location, fn) => {
 };
 
 module.exports = geocode;
+
+// const getgeo = () => {
+//   geocode(';', (error, { longitude, latitude, location }) => {
+//     console.log(error, longitude, latitude, location);
+//   });
+// };
+
+// getgeo();

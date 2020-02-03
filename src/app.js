@@ -11,12 +11,10 @@ app.get('', (req, res) => {
 app.get('/weather', async (req, res) => {
   const { error, data, location } = await getWeather(req.query.address);
   if (error) {
-    console.log('error', error);
     res.send({
       error
     });
   } else {
-    console.log('data', data, location);
     res.send({
       location,
       data

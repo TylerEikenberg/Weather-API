@@ -21,7 +21,7 @@ const getFore = async () => {
   }
 };
 
-getFore();
+// getFore();
 
 module.exports = forecast;
 

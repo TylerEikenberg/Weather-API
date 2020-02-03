@@ -6,16 +6,24 @@ const getWeather = async userLocation => {
   if (geoFetch.error || geoFetch.features.length === 0) {
     return 'Error: Invalid location.';
   } else {
-    return await geoFetch;
+    const forecastFetch = await forecast(
+      geoFetch.features[0].center[0],
+      geoFetch.features[0].center[1]
+    );
+    if (forecastFetch.statusCode) {
+      return forecastFetch.message;
+    } else {
+      return { data: forecastFetch, location: geoFetch.features[0].place_name };
+    }
   }
 };
 
 const useGetWeather = async () => {
-  const data = await getWeather('%');
+  const data = await getWeather('!');
   console.log('data: ', data);
 };
 
-// useGetWeather();
+useGetWeather();
 
 // const getWeather = (userLocation = 'Baltimore', dataHandler) => {
 //   geocode(userLocation, (geoError, { longitude, latitude, location }) => {

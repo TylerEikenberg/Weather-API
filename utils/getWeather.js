@@ -6,13 +6,16 @@ const getWeather = async userLocation => {
   if (geoFetch.error || geoFetch.features.length === 0) {
     return 'Error: Invalid location.';
   } else {
-    const { place_name } = geoFetch.features[0];
-    const [longitude, latitude] = geoFetch.features[0].center;
-    console.log(place_name, longitude, latitude);
+    return await geoFetch;
   }
 };
 
-getWeather('baltimore');
+const useGetWeather = async () => {
+  const data = await getWeather('%');
+  console.log('data: ', data);
+};
+
+useGetWeather();
 
 // const getWeather = (userLocation = 'Baltimore', dataHandler) => {
 //   geocode(userLocation, (geoError, { longitude, latitude, location }) => {

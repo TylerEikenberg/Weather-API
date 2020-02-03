@@ -8,37 +8,20 @@ app.get('', (req, res) => {
   res.redirect('/weather');
 });
 
-app.get('/weather', (req, res) => {
-  getWeather(req.query.address, (error, { data, location }) => {
-    if (error) {
-      res.send({
-        error: error.message
-      });
-    } else {
-      const {
-        temperature,
-        tempHigh,
-        tempLow,
-        precipitation,
-        humidity,
-        wind,
-        icon,
-        summary
-      } = data;
-
-      res.send({
-        temperature,
-        tempHigh,
-        tempLow,
-        precipitation,
-        humidity,
-        wind,
-        icon,
-        summary,
-        location
-      });
-    }
-  });
+app.get('/weather', async (req, res) => {
+  const { error, data, location } = await getWeather(req.query.address);
+  if (error) {
+    console.log('error', error);
+    res.send({
+      error
+    });
+  } else {
+    console.log('data', data, location);
+    res.send({
+      location,
+      data
+    });
+  }
 });
 
 app.listen(port, () => {

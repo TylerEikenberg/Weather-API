@@ -17,8 +17,7 @@ const getWeather = async userLocation => {
     }
   }
 };
-// handle error for this function then put it in the main app
-// ya did it, buddy.
+
 const useGetWeather = async () => {
   const { error, data, location } = await getWeather('pittsburgh');
   if (error) {
@@ -28,7 +27,7 @@ const useGetWeather = async () => {
   }
 };
 
-useGetWeather();
+// useGetWeather();
 
 // const getWeather = (userLocation = 'Baltimore', dataHandler) => {
 //   geocode(userLocation, (geoError, { longitude, latitude, location }) => {

@@ -9,7 +9,7 @@ const getWeather = async userLocation => {
     const [latitude, longitude] = geoFetch.features[0].center;
     const forecastFetch = await forecast(longitude, latitude);
     if (forecastFetch.statusCode) {
-      return forecastFetch.message;
+      return { error: forecastFetch.message };
     } else {
       return { data: forecastFetch, location: geoFetch.features[0].place_name };
     }

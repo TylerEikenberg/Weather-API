@@ -11,18 +11,6 @@ const forecast = async (longitude, latitude, fn) => {
   }
 };
 
-const getFore = async () => {
-  const response = await forecast(-79.14, 32.5);
-  // const response = await forecast('!', 0);
-  if (response.statusCode) {
-    console.log(response.message);
-  } else {
-    console.log(response.currently.temperature);
-  }
-};
-
-// getFore();
-
 module.exports = forecast;
 
 //           temp: res.currently.temperature,

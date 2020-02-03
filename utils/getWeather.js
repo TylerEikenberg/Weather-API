@@ -1,7 +1,7 @@
 const geocode = require('./geocode');
 const forecast = require('./forecast');
 
-const getWeather = async userLocation => {
+const getWeather = async (userLocation = 'Baltimore') => {
   const geoFetch = await geocode(userLocation);
   if (geoFetch.error || geoFetch.features.length === 0) {
     return { error: '400, Invalid location.' };

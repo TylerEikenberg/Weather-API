@@ -15,7 +15,7 @@ const useGetWeather = async () => {
   console.log('data: ', data);
 };
 
-useGetWeather();
+// useGetWeather();
 
 // const getWeather = (userLocation = 'Baltimore', dataHandler) => {
 //   geocode(userLocation, (geoError, { longitude, latitude, location }) => {

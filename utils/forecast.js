@@ -12,12 +12,3 @@ const forecast = async (longitude, latitude) => {
 };
 
 module.exports = forecast;
-
-//           temp: res.currently.temperature,
-//           tempHigh: res.daily.data[0].temperatureHigh,
-//           tempLow: res.daily.data[0].temperatureLow,
-//           precipitation: res.currently.precipProbability,
-//           humidity: res.currently.humidity,
-//           wind: res.currently.windSpeed,
-//           icon: res.currently.icon,
-//           summary: res.daily.summary

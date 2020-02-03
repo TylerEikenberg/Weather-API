@@ -6,10 +6,8 @@ const getWeather = async userLocation => {
   if (geoFetch.error || geoFetch.features.length === 0) {
     return { error: 'Invalid location.' };
   } else {
-    const forecastFetch = await forecast(
-      geoFetch.features[0].center[1],
-      geoFetch.features[0].center[0]
-    );
+    const [latitude, longitude] = geoFetch.features[0].center;
+    const forecastFetch = await forecast(longitude, latitude);
     if (forecastFetch.statusCode) {
       return forecastFetch.message;
     } else {
@@ -17,32 +15,4 @@ const getWeather = async userLocation => {
     }
   }
 };
-
-const useGetWeather = async () => {
-  const { error, data, location } = await getWeather('pittsburgh');
-  if (error) {
-    console.log('error', error);
-  } else {
-    console.log('data', data, location);
-  }
-};
-
-// useGetWeather();
-
-// const getWeather = (userLocation = 'Baltimore', dataHandler) => {
-//   geocode(userLocation, (geoError, { longitude, latitude, location }) => {
-//     if (geoError) {
-//       dataHandler(geoError, {});
-//     } else {
-//       forecast(latitude, longitude, (forecastError, data) => {
-//         if (forecastError) {
-//           dataHandler(forecastError, {});
-//         } else {
-//           dataHandler(undefined, { data, location });
-//         }
-//       });
-//     }
-//   });
-// };
-
 module.exports = getWeather;

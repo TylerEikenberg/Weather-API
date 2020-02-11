@@ -1,7 +1,9 @@
 const express = require('express');
 const getWeather = require('../utils/getWeather');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 3000;
 
 app.get('', (req, res) => {
